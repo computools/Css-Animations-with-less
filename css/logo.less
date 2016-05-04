@@ -1,0 +1,324 @@
+@logo: rgb(52, 73, 94);
+@fon: rgb(255, 255, 255);
+
+@bigCircle: 350px;
+@fKoef: 50px;
+@firstCircle: @bigCircle - @fKoef;
+@firstIndent: @fKoef/2;
+
+.sizeCircle(@white, @top, @position){
+  width: @white;
+  height: @white;
+  top: @top;
+  left: @top;
+  border-radius: 50%;
+  position: @position;
+}
+
+.lineVertical(@white, @height, @left){
+  width: @white;
+  height: @height;
+  left: @left;
+  position: relative;
+}
+
+.animation-name(@name){
+  -webkit-animation-name:@name;
+  -moz-animation-name: @name;
+  -o-animation-name: @name;
+  animation-name: @name;
+}
+.animation-duration(@duration){
+  -webkit-animation-duration:@duration;
+  -moz-animation-duration: @duration;
+  -o-animation-duration: @duration;
+  animation-duration: @duration;
+}
+.animation-timing-function(@function:linear){
+  -webkit-animation-timing-function:@function;
+  -moz-animation-timing-function: @function;
+  -o-animation-timing-function: @function;
+  animation-timing-function: @function;
+}
+.animation-iteration-count(@count:1){
+  -webkit-animation-iteration-count:@count;
+  -moz-animation-iteration-count: @count;
+  -o-animation-iteration-count: @count;
+  animation-iteration-count: @count;
+}
+.animation-direction(@direction: normal){
+  -webkit-animation-direction:@direction;
+  -moz-animation-direction: @direction;
+  -o-animation-direction: @direction;
+  animation-direction: @direction;
+}
+.animation-play-state(@state){
+  -webkit-animation-play-state:@state;
+  -moz-animation-play-state: @state;
+  -o-animation-play-state: @state;
+  animation-play-state: @state;
+}
+.animation-delay(@delay: 0s){
+  -webkit-animation-delay:@delay;
+  -moz-animation-delay: @delay;
+  -o-animation-delay: @delay;
+  animation-delay: @delay;
+}
+.animation-fill-mode(@mode){
+  -webkit-animation-fill-mode:@mode;
+  -moz-animation-fill-mode: @mode;
+  -o-animation-fill-mode: @mode;
+  animation-fill-mode: @mode;
+}
+
+html{
+  height: 100%;
+}
+body{
+  margin: 0;
+  min-height: 100%;
+}
+
+.container{
+  width: 1000px;
+  margin: 100px auto;
+}
+
+.logo{
+  .sizeCircle(@bigCircle, 0, relative);
+//  background: @logo;
+    background: @fon;
+
+  .animation-name(secondAnim);
+  .animation-duration(0.5s);
+  .animation-fill-mode(forwards);
+  .animation-delay(0.5s);
+
+  &:before{
+    content: '';
+    position: absolute;
+    background: @fon;
+    width: @bigCircle/2;
+    height: @bigCircle;
+    right: 0;
+  }
+
+  .increaseCircle{
+    .sizeCircle(@firstCircle, @firstIndent, relative);
+//    background: @logo;
+    background: @fon;
+
+    .animation-name(secondAnim);
+    .animation-duration(0.5s);
+    .animation-fill-mode(forwards);
+    .animation-delay(0.5s);
+
+    .circle.left{
+      background: @fon;
+      width: 0;
+      height: 0;
+      position: absolute;
+      border-radius: 50%;
+
+//      .animation-timing-function(cubic-bezier(.65, 1.95, .03, .32));
+      .animation-name(thirdAnim);
+      .animation-duration(1s);
+      .animation-fill-mode(forwards);
+      .animation-delay(1s);
+
+      &:nth-child(1){
+        top: -43px;
+        left: 53px;
+      }
+      &:nth-child(2){
+        top: 19px;
+        left: -25px;
+      }
+      &:nth-child(3){
+        top: 117px;
+        left: -57px;
+      }
+      &:nth-child(4){
+        top: 215px;
+        left: -27px;
+      }
+      &:nth-child(5){
+        top: 282px;
+        left: 52px;
+      }
+    }
+
+    .circle.right{
+      background: @logo;
+//      background: @fon;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      position: absolute;
+
+      top: 10px;
+      right: 34px;
+      z-index: 100;
+
+//      .animation-timing-function(cubic-bezier(.65, 1.95, .03, .32));
+      .animation-name(fourthAnim);
+      .animation-duration(0.5s);
+      .animation-fill-mode(forwards);
+      .animation-delay(2.5s);
+    }
+  }
+
+  .line{
+    background: @fon;
+    .lineVertical(20px, @firstCircle, 50%);
+
+    &:before{
+      content: '';
+      position: absolute;
+      border: 170px solid transparent;
+      border-left: 75px solid @fon;
+      border-top: 99px solid @fon;
+    }
+  }
+
+  .innerCircleSheer{
+
+    .sizeCircle(220px, 40px, absolute);
+    background: @fon;
+//    border-top-right-radius: 59% 60%;
+
+    .innerCircle{
+      .sizeCircle(170px, 25px, absolute);
+      background: @logo;
+
+      .animation-name(firstAnim);
+      .animation-duration(0.5s);
+      .animation-fill-mode(forwards);
+      .animation-delay(0s);
+    }
+  }
+}
+
+.firstAnimated(){
+    0%{
+      width: 1px;
+      height: 170px;
+      left: 50%;
+    }
+//    25%{
+//      height: 170px;
+//    }
+    100%{
+      width: 170px;
+      left: 25px;
+    }
+}
+
+.secondAnimated(){
+    100%{
+      background: @logo;
+    }
+}
+
+.thirdAnimated(){
+  0%{
+    width: 0;
+    height: 0;
+  }
+  100%{
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.fourthAnimated(){
+  0%{
+    width: 0;
+    height: 0;
+  }
+  100%{
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@-moz-keyframes firstAnim {
+  .firstAnimated();
+}
+
+@-ms-keyframes firstAnim{
+  .firstAnimated();
+}
+
+@-o-keyframes firstAnim{
+  .firstAnimated();
+}
+
+@-webkit-keyframes firstAnim {
+  .firstAnimated();
+}
+
+@keyframes firstAnim {
+  .firstAnimated();
+}
+
+@-moz-keyframes secondAnim {
+  .secondAnimated();
+}
+
+@-ms-keyframes secondAnim{
+  .secondAnimated();
+}
+
+@-o-keyframes secondAnim{
+  .secondAnimated();
+}
+
+@-webkit-keyframes secondAnim {
+  .secondAnimated();
+}
+
+@keyframes secondAnim {
+  .secondAnimated();
+}
+
+@-moz-keyframes thirdAnim {
+  .thirdAnimated();
+}
+
+@-ms-keyframes thirdAnim{
+  .thirdAnimated();
+}
+
+@-o-keyframes thirdAnim{
+  .thirdAnimated();
+}
+
+@-webkit-keyframes thirdAnim {
+  .thirdAnimated();
+}
+
+@keyframes thirdAnim {
+  .thirdAnimated();
+}
+
+
+@-moz-keyframes fourthAnim {
+  .fourthAnimated();
+}
+
+@-ms-keyframes fourthAnim{
+  .fourthAnimated();
+}
+
+@-o-keyframes fourthAnim{
+  .fourthAnimated();
+}
+
+@-webkit-keyframes fourthAnim {
+  .fourthAnimated();
+}
+
+@keyframes fourthAnim {
+  .fourthAnimated();
+}
